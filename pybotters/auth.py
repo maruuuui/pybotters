@@ -14,6 +14,7 @@ from aiohttp.hdrs import METH_GET
 from aiohttp.payload import JsonPayload
 from multidict import CIMultiDict, MultiDict
 from yarl import URL
+from .util import bitbank_nonce
 
 
 class Auth:
@@ -195,7 +196,7 @@ class Auth:
 
         path = url.raw_path_qs
         body = JsonPayload(data) if data else FormData(data)()
-        nonce = str(int(time.time()))
+        nonce = bitbank_nonce()
         if method == METH_GET:
             text = f'{nonce}{path}'.encode()
         else:
