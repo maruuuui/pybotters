@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import Optional
+from typing import List, Optional
 
 from ..store import DataStore, DataStoreManager
 from ..typedefs import Item
@@ -53,7 +53,7 @@ class Depth(DataStore):
     _KEYS = ['pair', 'side', 'price']
     _BDSIDE = {'sell': 'asks', 'buy': 'bids'}
 
-    def sorted(self, query: Optional[Item] = None) -> dict[str, list[float]]:
+    def sorted(self, query: Optional[Item] = None) -> dict[str, List[List[float]]]:
         if query is None:
             query = {}
         result = {'asks': [], 'bids': []}
